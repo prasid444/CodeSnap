@@ -1,13 +1,13 @@
 {
   "name": "codesnap",
-  "displayName": "CodeSnap",
-  "description": "📷 Take beautiful screenshots of your code",
+  "displayName": "CodeSnap - Prasid",
+  "description": "📷 Take beautiful screenshots of your code. Extended for personal use",
   "version": "1.3.4",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kufii/CodeSnap"
+    "url": "https://github.com/prasid444/CodeSnap"
   },
-  "publisher": "adpyke",
+  "publisher": "prasid444",
   "icon": "icon.png",
   "license": "MIT",
   "engines": {
@@ -34,7 +34,7 @@
     "commands": [
       {
         "command": "codesnap.start",
-        "title": "CodeSnap 📸"
+        "title": "CodeSnap-Prasid 📸"
       }
     ],
     "menus": {
@@ -46,7 +46,7 @@
     },
     "configuration": {
       "type": "object",
-      "title": "CodeSnap",
+      "title": "CodeSnap-Prasid",
       "properties": {
         "codesnap.backgroundColor": {
           "scope": "resource",
@@ -83,6 +83,12 @@
           "type": "boolean",
           "default": false,
           "description": "Display window title with open folder / file name"
+        },
+        "codesnap.windowTitleRelativeCount": {
+          "scope": "resource",
+          "type": "number",
+          "default": 0,
+          "description": "Breadcrumb length for the parent folder. For full use 0"
         },
         "codesnap.showLineNumbers": {
           "scope": "resource",

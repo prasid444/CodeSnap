@@ -21,7 +21,8 @@ const getConfig = () => {
     'realLineNumbers',
     'transparentBackground',
     'target',
-    'shutterAction'
+    'shutterAction',
+    'windowTitleRelativeCount'
   ]);
 
   const selection = editor && editor.selection;
@@ -30,7 +31,22 @@ const getConfig = () => {
   let windowTitle = '';
   if (editor && extensionSettings.showWindowTitle) {
     const activeFileName = editor.document.uri.path.split('/').pop();
-    windowTitle = `${vscode.workspace.name} - ${activeFileName}`;
+    // Getting the relative path
+    const workspaceFolder = vscode.workspace.getWorkspaceFolder(editor.document.uri);
+    let relativePath = workspaceFolder ? vscode.workspace.asRelativePath(editor.document.uri) : editor.document.uri.path;
+    const sizeOfRelativePath=extensionSettings.windowTitleRelativeCount
+    if(sizeOfRelativePath!==0){
+      // trim the relativePath upto given size
+      // Split the relativePath by "/"
+      let pathSegments = relativePath.split('/');
+
+      // Reverse the array and take only the last 'sizeOfRelativePath' segments
+      pathSegments = pathSegments.reverse().slice(0, sizeOfRelativePath).reverse();
+
+      // Join the segments back together with "/" as the separator
+      relativePath = pathSegments.join('/');
+    }
+    windowTitle = `${vscode.workspace.name} - ${relativePath}`;
   }
 
   return {
@@ -44,7 +60,7 @@ const getConfig = () => {
 const createPanel = async (context) => {
   const panel = vscode.window.createWebviewPanel(
     'codesnap',
-    'CodeSnap 📸',
+    'CodeSnap - Prasid 📸',
     { viewColumn: vscode.ViewColumn.Beside, preserveFocus: true },
     {
       enableScripts: true,
